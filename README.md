@@ -3,7 +3,7 @@ Palinodies
 
 Simplement des bouts de code
 
-Les polices viennent des adresses suivantes :
+Les polices, comme le code, sont libres viennent des adresses suivantes :
 
 https://www.dafont.com/karmatic-arcade.font
 

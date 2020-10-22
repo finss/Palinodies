@@ -16,11 +16,11 @@ from pygame.locals import *
 from random import randint
 import pygame_gui
 
-largeur_grille = 80
-hauteur_grille = 40
+largeur_grille = 10
+hauteur_grille = 10
 
 taille_case = 20
-nombre_mines = 320
+nombre_mines = 10
 
 score = (nombre_mines,largeur_grille*hauteur_grille-nombre_mines)
 
@@ -87,7 +87,7 @@ class Demineur :
             self.tableau = self.decouvre(pos)
         return False    
 
-    def decouvre(self, pos) :
+    def decouvre(self, pos) : # Fonction recursive de découverte des cases à base de boucle pour
         x,y = pos
         for i in range(x-1,x+2) :
             for j in range(y-1,y+2) :
@@ -97,8 +97,6 @@ class Demineur :
                             self.tableau[i][j][0] = 1                # découvre case
                             self.score = (self.score[0],self.score[1]- 1)
                             self.decouvre((i,j))
-                        if self.tableau[i][j][2] != 0 and self.tableau[i][j][0] == 1:        # une ou plusieurs mines autour et case découverte
-                            pass
                         if self.tableau[i][j][2] != 0 and self.tableau[i][j][0] == 0:        # une ou plusieurs mines autour et case couverte
                             self.tableau[i][j][0] = 1
                             self.score = (self.score[0],self.score[1]- 1)
@@ -111,7 +109,6 @@ class Interface :
         self.largeur = largeur                  # en pixels
         self.hauteur = hauteur
         self.taille_case = taille_case
-        self.ecran
 
     def determine_position_arrondie_ecran(self, pos) :
         x = 10 * int(pos[0]/10)
@@ -140,7 +137,7 @@ class Interface :
                     self.ecran = self.dessine_case((i,j), DARK_GRAY)
                 elif self.tableau[i][j][0] == 1 :                                # case découverte
                     if self.tableau[i][j][2] != 0 :
-                        if self.tableau[i][j][2] == 1:
+                        if self.tableau[i][j][2] == 1:                              #on colore les cases en fonction du nombre de mines autour
                             self.ecran = self.dessine_case((i,j), LIGHT_GREEN4) 
                         elif self.tableau[i][j][2] == 2:
                             self.ecran = self.dessine_case((i,j), LIGHT_GREEN3) 
